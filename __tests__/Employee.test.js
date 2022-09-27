@@ -10,12 +10,12 @@ describe('Employee', ( ) => {
         it('should get initialized correctly', () => {
              //Arrange 
              //Act
-            let newEmplooyee = new Employee("sid", 1, "blah@gmail.com")
+            let newEmployee = new Employee("sid", 1, "blah@gmail.com")
 
             // Assert
-            expect(newEmplooyee.name).toEqual("sid")
-            expect(newEmplooyee.id).toEqual(1)
-            expect(newEmplooyee.email).toEqual("blah@gmail.com")
+            expect(newEmployee.name).toEqual("sid")
+            expect(newEmployee.id).toEqual(1)
+            expect(newEmployee.email).toEqual("blah@gmail.com")
 
 
 
@@ -28,10 +28,10 @@ describe('Employee', ( ) => {
         it('should retuen the name given', () => {
             //Arrange 
              //Act
-             let newEmplooyee = new Employee("sid", 1, "blah@gmail.com")
+             let newEmployee = new Employee("sid", 1, "blah@gmail.com")
 
              //Assert
-             expect(newEmplooyee.getName()).toEqual("sid")
+             expect(newEmployee.getName()).toEqual("sid")
 
              
 
@@ -42,9 +42,12 @@ describe('Employee', ( ) => {
     });
 
     describe('getRole', ( ) => {
-        it('should get initialized correctly', () => {
+        it('should return their role in the company ', () => {
 
-            
+            let role = "Employee"
+            let newEmployee = new Employee("austin", 1, "posty68541@gmail.com")
+
+            expect(newEmployee.getRole()).toEqual(role);
             
         });
 

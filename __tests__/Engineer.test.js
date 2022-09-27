@@ -2,10 +2,28 @@ const Engineer = require("../lib/Engineer")
 
 describe('Enginner', () => {
     describe('initialization', () =>{
-
+        let newEngineer = new Engineer("Seb", 1, "SebTx@gmail.com", "github.com/Seb");
+            //Assert
+            console.log(newEngineer)
+            expect(newEngineer.name).toEqual("Seb");
+            expect(newEngineer.id).toEqual(1);
+            expect(newEngineer.email).toEqual("SebTx@gmail.com");
+            expect(newEngineer.github).toEqual("github.com/Seb");
 
 
     });
+
+    describe("getGithub", ()=>{
+
+        it('should return github user name ', () => {
+            let newEngineer = new Engineer("austin", 1 ,"post65841@gmail.com", "github.com/austin" )
+            
+
+            expect(newEngineer.getGitHub()).toEqual("github.com/austin")
+
+        });
+
+    })
 
 
     describe('getRole', () => {
