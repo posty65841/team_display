@@ -1,10 +1,7 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const Manager = require('./lib/Manager');
-const teamMem = []
 
-const generateHTML = ({ jobTitle, name, email, idNum, officeNumber, school, gitHub }) =>
-  `<!DOCTYPE html>
+`<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -15,196 +12,48 @@ const generateHTML = ({ jobTitle, name, email, idNum, officeNumber, school, gitH
 <body>
   <div class="jumbotron jumbotron-fluid">
   <div class="container" bg >
-    <h1  class= "text-center"  > MY TEAM</h1>
-</div>
-</div>
-    <div class="card" style="width: 18rem;">
-  <div class="card-body ">
+  <h1  class= "text-center"  > MY TEAM</h1>
+  </div>
+  </div>
+  <div class="card justify " style="width: 18rem;">
+  <div class="card-body">
     <h5 class="card-title">${jobTitle}</h5>
-    <p  class="card-text" >${email}</p>
+    <p class="card-text">${email}</p>
     <p class="card-text">${idNum}</p>
     <p class="card-text">${name}</p>
-    <p class="card-text">${officeNumber}</p>
-    <p class="card-text">${school}</p>
-    <p class="card-text">${gitHub}</p>
-    
-    
+        
   </div>
-</div>
-
-</body>
-</html>`
-
-
-function Menu (){
-  function buildManager (){
-    inquirer
-    .prompt([
-      {
-        type: 'input',
-        name: 'officeNumber',
-        message: 'what is your office number?',
-        when: (answers) =>{
-          if (answers.jobTitle === "Manager") return true
-         
-          else return false
-        } 
-        },
-
-        {
-          type: 'input',
-          name: 'name',
-          message: 'What is your name?',
-        },
-      
-        {
-          type: 'input',
-          name: 'email',
-          message: 'What is your email?',
-        },
-    
-    
-       
-        {
-          type: 'input',
-          name: 'idNum',
-          message: 'what is your id number',
-        },
-        {
-          type: 'input',
-          name: 'officeNumber',
-          message: 'what is your officeNumber ?',
-        },
-        
-    
-      
+  </div>
+  </body>
+  </html>`
 
 
-
-    ])
-    .then((answers) => {
-
-     const manager = new Manager (
-      answers.name, answers.idNum, answers.email, answers.officeNumber
-      
-
-     )
-     teamMem.push (manager)
-
-
-     buildTeam();
-
-    }) 
-  } 
-  
-
-  function buildTeam(){
-
-    inquirer
-    .prompt([
-      {
-        type: 'list',
-        name: 'jobTitle',
-        message: 'what is your job title ?',
-        choices: [ "Engineer","Intern" ],
-        },
+inquirer
+.prompt([
+  {  type: 'list',
+  name: 'jobTitle',
+  message: 'what is your job title ?',
+  choices: ["Manager", "Engineer","Intern" ],
+  },
+  {
+    type: 'input',
+    name: 'email',
+    message: 'What is your email?',
+  },
+  {     type: 'input',
+  name: 'name',
+  message: 'What is your name?',
+},
 
 
-      ])
-      }
-   buildManager();
+{
+  type: 'input',
+  name: 'idNum',
+  message: 'what is your id number',
+},
 
+])
 
-
-   function buildEngineer(){
-
-    inquirer
-    .prompt([
-      {
-        type: 'input',
-        name: 'gitHub',
-        message: 'what is your github user name ?',
-        
-        },
-
-        {
-          type: 'input',
-          name: 'name',
-          message: 'What is your name?',
-        },
-      
-        {
-          type: 'input',
-          name: 'email',
-          message: 'What is your email?',
-        },
-    
-    
-       
-        {
-          type: 'input',
-          name: 'idNum',
-          message: 'what is your id number',
-        },
-
-
-      ])
-
-   }
-   buildEngineer();
-
-
-   function buildIntern(){
-
-
-    inquirer
-    .prompt([
-      {
-        type: 'input',
-        name: 'school',
-        message: 'what school did you attend  ?',
-        
-      },
-
-        {
-          type: 'input',
-          name: 'name',
-          message: 'What is your name?',
-        },
-      
-        {
-          type: 'input',
-          name: 'email',
-          message: 'What is your email?',
-        },
-    
-    
-       
-        {
-          type: 'input',
-          name: 'idNum',
-          message: 'what is your id number',
-        },
-
-
-      ])
-
-
-   }
-   buildIntern();
-
-   
-}
-Menu();
-
-// .then((answers) => {
-//    const htmlPageContent = generateHTML(answers);
-
-
-//    fs.writeFile('index.html', htmlPageContent, (err) =>
-//      err ? console.log(err) : console.log('Successfully created index.html!')
-//    );
-//  });
 
 
 
