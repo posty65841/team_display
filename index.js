@@ -1,61 +1,191 @@
-const inquirer = require('inquirer');
-const fs = require('fs');
+const Intern = require("./lib/Intern.js")
+const Manager = require("./lib/Manager.js")
+const Engineer = require("./lib/Engineer.js")
 
-`<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <title >Myteam</title>
-</head>
-<body>
-  <div class="jumbotron jumbotron-fluid">
-  <div class="container" bg >
-  <h1  class= "text-center"  > MY TEAM</h1>
-  </div>
-  </div>
-  <div class="card justify " style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">${jobTitle}</h5>
-    <p class="card-text">${email}</p>
-    <p class="card-text">${idNum}</p>
-    <p class="card-text">${name}</p>
-        
-  </div>
-  </div>
-  </body>
-  </html>`
+const inquirer = require("inquirer")
+const fs = require("fs")
 
-
-inquirer
-.prompt([
-  {  type: 'list',
-  name: 'jobTitle',
-  message: 'what is your job title ?',
-  choices: ["Manager", "Engineer","Intern" ],
-  },
-  {
-    type: 'input',
-    name: 'email',
-    message: 'What is your email?',
-  },
-  {     type: 'input',
-  name: 'name',
-  message: 'What is your name?',
-},
-
-
-{
-  type: 'input',
-  name: 'idNum',
-  message: 'what is your id number',
-},
-
-])
+const allPeople = []
+const genhtml = require ("./src/genhtml")
 
 
 
+// const generateHTML = ({ name, id, email, github, officeNumber, school }) =>
+//   `<!DOCTYPE html>
+// <html lang="en">
+// <head>
+//   <meta charset="UTF-8">
+//   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+//   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+//   <title>Document</title>
+// </head>
+// <body>
+//   <div class="jumbotron jumbotron-fluid">
+//   <div class="container">
+//     <h1 class="display-4">Hi! My name is ${name}</h1>
+//     <p class="lead">I am from ${id}.</p>
+//     <h3>Example heading <span class="badge badge-secondary">Contact Me</span></h3>
+//     <ul class="list-group">
+//       <li class="list-group-item">My GitHub username is ${github}</li>
+//       <li class="list-group-item">LinkedIn: ${email}</li>
+//     </ul>
+//   </div>
+// </div>
+// </body>
+// </html>`;
+
+
+
+function generateEmployee() {
+  inquirer
+    .prompt([
+      {
+        type: 'list',
+        name: 'role',
+        message: 'what are you for the company ',
+        choices: ["Manager", "Engineer", "Intern", "quit"]
+      },
+    ])
+  
+      .then((answers) => {
+
+      if (answers.role === "Manager") {
+
+        console.log(answers)
+        genManager()
+
+      }
+
+      else if (answers.role === "Engineer") {
+        console.log(answers)
+
+        genEngineer()
+
+      }
+      else if (answers.role === "Intern") {
+        console.log(answers)
+
+        genIntern()
+
+      }
+      else {
+        console.log("team made ")
+        genCard();
+
+
+
+      }
+    });
+
+}
+
+
+
+
+
+function genManager() {
+  inquirer.prompt([
+    {
+      type: 'input',
+      name: 'name',
+      message: 'What is your name?',
+    },
+    {
+      type: 'input',
+      name: 'id',
+      message: 'What is your ID number?',
+    },
+    {
+      type: 'input',
+      name: 'email',
+      message: 'What is your email?',
+    },
+    {
+      type: 'input',
+      name: 'officeNum',
+      message: 'What is your office number?',
+    },
+  ]).then(response => {
+    let manager = new Manager(response.name, response.id, response.email, response.officeNum)
+
+    allPeople.push(manager)
+    // insert add new member function here**
+    generateEmployee()
+})
+}
+
+
+function genEngineer() {
+  inquirer.prompt([
+    {
+      type: 'input',
+      name: 'name',
+      message: 'What is your name?',
+    },
+    {
+      type: 'input',
+      name: 'id',
+      message: 'What is your ID number?',
+    },
+    {
+      type: 'input',
+      name: 'email',
+      message: 'What is your email?',
+    },
+    {
+      type: 'input',
+      name: 'github',
+      message: 'What is your GitHub Username?',
+    },
+
+  ]).then(response => {
+    let engineer = new Engineer(response.name, response.id, response.email, response.github)
+
+    allPeople.push(Engineer)
+    
+    generateEmployee()
+})
+}
+
+function genIntern() {
+  inquirer.prompt([
+    {
+      type: 'input',
+      name: 'name',
+      message: 'What is your name?',
+    },
+    {
+      type: 'input',
+      name: 'id',
+      message: 'What is your ID number?',
+    },
+    {
+      type: 'input',
+      name: 'email',
+      message: 'What is your email?',
+    },
+    {
+      type: 'input',
+      name: 'school',
+      message: 'What school did you attend ?',
+    },
+  ]).then(response => {
+    let intern = new Intern(response.name, response.id, response.email, response.school)
+
+    allPeople.push(Intern)
+    // insert add new member function here**
+    generateEmployee()
+})
+}
+
+function genCard(){
+  fs.writeFile('generate-index.html', genhtml(allPeople), (err) =>
+          err ? console.log(err) : console.log('you did it yayyyyyy')
+        );
+
+}
+
+generateEmployee();
 
 
 
@@ -63,20 +193,12 @@ inquirer
 
 
 
-//   GIVEN a command-line application that accepts user input
-// WHEN I am prompted for my team members and their information
-// THEN an HTML file is generated that displays a nicely formatted team roster based on user input
-// WHEN I click on an email address in the HTML
-// THEN my default email program opens and populates the TO field of the email with the address
-// WHEN I click on the GitHub username
-// THEN that GitHub profile opens in a new tab
-// WHEN I start the application
-// THEN I am prompted to enter the team manager’s name, employee ID, email address, and office number
-// WHEN I enter the team manager’s name, employee ID, email address, and office number
-// THEN I am presented with a menu with the option to add an engineer or an intern or to finish building my team
-// WHEN I select the engineer option
-// THEN I am prompted to enter the engineer’s name, ID, email, and GitHub username, and I am taken back to the menu
-// WHEN I select the intern option
-// THEN I am prompted to enter the intern’s name, ID, email, and school, and I am taken back to the menu
-// WHEN I decide to finish building my team
-// THEN I exit the application, and the HTML is generated
+
+
+
+
+
+
+
+
+
