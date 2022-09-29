@@ -43,7 +43,7 @@ const generateAllPeople = allPeople => {
     const genIntern = intern => {
         return `
         
-        <div class="card employee-card mr-4 ml-4 mb-3">
+        <div class="card employee-card mr-4 ml-4 mb-3 ">
         <div class="card-header text-center">
             <h2 class="card-title">${intern.getName()}</h2>
             <h3 class="card-title"><i class="fa-solid fa-school"></i>${intern.getRole()}</h3>
@@ -91,8 +91,9 @@ module.exports = allPeople => {
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <title>My Team</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="style.css">
+        <script src="https://kit.fontawesome.com/c502137733.js"></script>
         </head>
         
         <body>
@@ -110,7 +111,6 @@ module.exports = allPeople => {
         </div>
         </div>
         </div>
-        <script src="https://kit.fontawesome.com/c502137733.js"></script>
     </body>
     </html>
 
