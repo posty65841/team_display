@@ -163,19 +163,3 @@ function genCard(){
 }
 
 generateEmployee();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

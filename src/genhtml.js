@@ -5,7 +5,7 @@ const generateAllPeople = allPeople => {
     const genManager = manager => {
         return `
 
-    <div class="card employee-card mr-4 ml-4 mb-3">
+    <div class="card employee-card mr-4 ml-4 mb-3 ">
     <div class="card-header text-center">
         <h2 class="card-title">${manager.getName()}</h2>
         <h3 class="card-title"><i class="fas fa-mug-hot mr-2"></i>${manager.getRole()}</h3>
@@ -14,7 +14,7 @@ const generateAllPeople = allPeople => {
         <ul class="list-group">
             <li class="list-group-item">ID: ${manager.getId()}</li>
             <li class="list-group-item">Email: <a href="mailto:${manager.getEmail()}">${manager.getEmail()}</a>
-            <li class="list-group-item">Room Number: ${manager.getOfficeNumber()}</li>
+            <li class="list-group-item">Office Number: ${manager.getOfficeNumber()}</li>
         </ul>
     </div>
 </div>
@@ -24,7 +24,7 @@ const generateAllPeople = allPeople => {
     const genEngineer = engineer => {
         return `
 
-<div class="card employee-card mr-4 ml-4 mb-3">
+<div class="card employee-card mr-4 ml-4 mb-3 d-flex-auto">
                 <div class="card-header text-center">
                     <h2 class="card-title">${engineer.getName()}</h2>
                     <h3 class="card-title"><i class="fas fa-glasses mr-2"></i>${engineer.getRole()}</h3>
@@ -43,7 +43,7 @@ const generateAllPeople = allPeople => {
     const genIntern = intern => {
         return `
         
-        <div class="card employee-card mr-4 ml-4 mb-3 ">
+        <div class="card employee-card mr-4 ml-4 mb-3 d-flex-auto ">
         <div class="card-header text-center">
             <h2 class="card-title">${intern.getName()}</h2>
             <h3 class="card-title"><i class="fa fa-graduation-cap mr-2"></i>${intern.getRole()}</h3>
@@ -111,6 +111,8 @@ module.exports = allPeople => {
         </div>
         </div>
         </div>
+
+        <div class = "media @ 720px "> </div>
     </body>
     </html>
 
